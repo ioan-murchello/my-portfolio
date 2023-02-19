@@ -122,46 +122,76 @@ var prev_btn = document.querySelector(".prev"),
   total = document.querySelector(".total"),
   height = window.getComputedStyle(slider_window).height;
 var width = window.getComputedStyle(slider_window).offsetWidth;
-var imgs = ["./img/paracell.jpg", "./img/portfolio_foto.jpg", "./img/paracell.jpg", "./img/portfolio_foto.jpg"];
+var data = [{
+  thumbnail: "../img/paracell.jpg",
+  title: "ToDoList",
+  description: "Small project to show JavaScript knowedges",
+  url: "https://ioan-murchello.github.io/johns-portfolio/"
+}, {
+  thumbnail: "../img/paracell.jpg",
+  title: "Jhon's resume",
+  description: "Site width some sites.More then landing page",
+  url: "https://ioan-murchello.github.io/johns-portfolio/"
+}, {
+  thumbnail: "../img/paracell.jpg",
+  title: "Avilio",
+  description: "Take you way",
+  url: "https://ioan-murchello.github.io/johns-portfolio/"
+}, {
+  thumbnail: "../img/paracell.jpg",
+  title: "Build company",
+  description: "Just buil it!",
+  url: "https://ioan-murchello.github.io/johns-portfolio/"
+}];
 
 // render slides
 function renderSlides(arr, container) {
-  var img_wrapper;
-  var img;
+  var slide_body;
+  var slide_item;
   for (var i = 0; i < arr.length; i++) {
-    img_wrapper = document.createElement("div");
-    img_wrapper.classList.add("image__wrapper");
-    img = document.createElement("img");
-    img.setAttribute("src", arr[i]);
-    img.setAttribute("alt", "image");
-    img_wrapper.append(img);
-    container.append(img_wrapper);
+    slide_item = document.createElement("div");
+    slide_item.classList.add("slider__body-item");
+    slide_body = renderSlide(arr[i]);
+    slide_item.insertAdjacentHTML("afterbegin", slide_body);
+    container.append(slide_item);
   }
 }
-renderSlides(imgs, slider_line);
-var images = document.querySelectorAll(".image__wrapper");
+renderSlides(data, slider_line);
+function renderSlide(_ref) {
+  var thumbnail = _ref.thumbnail,
+    title = _ref.title,
+    description = _ref.description,
+    url = _ref.url;
+  return "<div class=\"slider__image-wrapper\">\n                <img src=".concat(thumbnail, " alt=\"image\" />\n              </div>\n              <div class=\"slider__description\">\n                <div class=\"slider__description-title\">").concat(title, "</div>\n                <div class=\"slider__description-text\">\n                  ").concat(description, "\n                </div>\n                <a href=").concat(url, " class=\"slider__description-btn btn\"\n                  >Open\n                  <svg\n                    width=\"12\"\n                    height=\"12\"\n                    viewBox=\"0 0 12 12\"\n                    fill=\"none\"\n                    xmlns=\"http://www.w3.org/2000/svg\"\n                  >\n                    <path\n                      d=\"M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z\"\n                      fill=\"white\"\n                    />\n                  </svg>\n                </a>\n              </div>\n             ");
+}
+var slides = document.querySelectorAll(".slider__body-item");
+var description_item = document.querySelectorAll(".slider__description");
 var index = 1;
 var offset = 0;
-var images_length = imgs.length;
-if (images_length < 10) {
-  total.textContent = "0".concat(images_length);
-  current.textContent = "0".concat(index);
+var data_length = data.length;
+if (data_length < 10) {
+  total.textContent = "0".concat(data_length);
+  current.textContent = "0".concat(index, "/");
 } else {
-  total.textContent = images_length;
+  total.textContent = data_length;
   current.textContent = index;
 }
 slider_line.style.transition = "all 0.4s";
-images.forEach(function (el) {
+slides.forEach(function (el) {
+  el.style.width = width + "px";
+  el.style.height = height + "px";
+});
+description_item.forEach(function (el) {
   el.style.width = width + "px";
   el.style.height = height + "px";
 });
 function makeSize() {
   width = slider_window.offsetWidth;
-  images.forEach(function (el) {
+  slides.forEach(function (el) {
     el.style.width = width + "px";
     el.style.height = height + "px";
   });
-  slider_line.style.width = width * images.length + "px";
+  slider_line.style.width = width * slides.length + "px";
   rollSlider();
 }
 makeSize();
@@ -172,42 +202,40 @@ function rollSlider() {
 
 //handlers
 next_btn.addEventListener("click", function () {
-  if (offset >= images_length - 1) {
+  if (offset >= data_length - 1) {
     offset = 0;
   } else {
     offset++;
   }
-  if (index === images_length) {
+  if (index === data_length) {
     index = 1;
   } else {
     index++;
   }
-  if (images_length < 10) {
-    current.textContent = "0".concat(index);
+  if (data_length < 10) {
+    current.textContent = "0".concat(index, "/");
   } else {
     current.textContent = index;
   }
-  slider_main.style.backgroundImage = "url(".concat(imgs[index - 1], ")");
   rollSlider();
   activeDots();
 });
 prev_btn.addEventListener("click", function () {
   if (offset <= 0) {
-    offset = images_length - 1;
+    offset = data_length - 1;
   } else {
     offset--;
   }
   if (index === 1) {
-    index = images_length;
+    index = data_length;
   } else {
     index--;
   }
-  if (images.length < 10) {
-    current.textContent = "0".concat(index);
+  if (slides.length < 10) {
+    current.textContent = "0".concat(index, "/");
   } else {
     current.textContent = index;
   }
-  slider_main.style.backgroundImage = "url(".concat(imgs[index - 1], ")");
   rollSlider();
   activeDots();
 });
@@ -221,7 +249,7 @@ function renderDots(length, container) {
 function createDots() {
   return "<div class=\"dots dots__outside\">\n            <div class=\"dots__inside\"></div>\n          </div>";
 }
-renderDots(imgs.length, dots);
+renderDots(data_length, dots);
 var allDots = document.querySelectorAll(".dots__inside");
 function activeDots() {
   allDots.forEach(function (el) {
