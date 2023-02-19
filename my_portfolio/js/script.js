@@ -123,22 +123,22 @@ var prev_btn = document.querySelector(".prev"),
   height = window.getComputedStyle(slider_window).height;
 var width = window.getComputedStyle(slider_window).offsetWidth;
 var data = [{
-  thumbnail: "../img/paracell.jpg",
+  thumbnail: "./img/paracell.jpg",
   title: "ToDoList",
   description: "Small project to show JavaScript knowedges",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
 }, {
-  thumbnail: "../img/paracell.jpg",
+  thumbnail: "./img/paracell.jpg",
   title: "Jhon's resume",
   description: "Site width some sites.More then landing page",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
 }, {
-  thumbnail: "../img/paracell.jpg",
+  thumbnail: "./img/paracell.jpg",
   title: "Avilio",
   description: "Take you way",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
 }, {
-  thumbnail: "../img/paracell.jpg",
+  thumbnail: "./img/paracell.jpg",
   title: "Build company",
   description: "Just buil it!",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
