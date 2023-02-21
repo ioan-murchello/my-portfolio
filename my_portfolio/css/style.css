@@ -388,6 +388,7 @@
   visibility: hidden;
   opacity: 0;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   transition: all 0.7s ease;
@@ -396,9 +397,8 @@
 
 .popup_dialog {
   position: relative;
-  margin-top: 100px;
   width: 450px;
-  height: 200px;
+  height: 144px;
   background-color: #f1f1eb;
   border-radius: 5px;
   box-shadow: 0 8px 25px #3d88c9;
@@ -1270,7 +1270,7 @@
 }
 
 .sidebar-links span {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .to-top {
@@ -1282,7 +1282,7 @@
   visibility: hidden;
   width: 60px;
   height: 60px;
-  bottom: 50px;
+  bottom: 20px;
   border: 1px solid rgba(118, 109, 251, 0.4901960784);
   right: 50px;
   z-index: 300;
@@ -2003,7 +2003,8 @@ svg {
 
 @media (max-width: 768px) {
   .popup_main_wrapper {
-    align-items: center;
+    align-items: flex-end;
+    margin: -160px 0 0 0;
   }
 
   .header__menu_wrapper {
@@ -2018,7 +2019,7 @@ svg {
   .header__nav {
     position: fixed;
     justify-content: flex-start;
-    width: 12%;
+    width: 86px;
     height: 100%;
     right: -100px;
     top: 0;
@@ -2026,6 +2027,7 @@ svg {
     overflow: auto;
     z-index: 400;
     box-shadow: 0 0 3px #50aeff;
+    padding: 70px 0 0 0;
   }
 
   .header__ul {
@@ -2129,7 +2131,7 @@ svg {
   }
 
   .sidebar-li {
-    margin: 0 0 30px 0;
+    margin: 0 0 20px 0;
   }
 
   .sidebar-li:first-child {
@@ -2137,7 +2139,7 @@ svg {
   }
 
   .sidebar-links {
-    font-size: 33px;
+    font-size: 24px;
     font-weight: 800;
   }
 
@@ -2176,6 +2178,12 @@ svg {
 }
 
 @media (max-width: 600px) {
+  .popup_close_btn {
+    width: 44px;
+    height: 44px;
+    bottom: -20px;
+  }
+
   .slider__sub-container {
     height: 500px;
     padding: 70px 0 0 0;
@@ -2213,10 +2221,6 @@ svg {
     font-size: 14px;
   }
 
-  .slider__description-btn {
-    padding: 8px 10px;
-  }
-
   .navigate__btns {
     top: -348px;
   }
@@ -2226,8 +2230,6 @@ svg {
   }
 
   .navigate__btn {
-    width: calc(10px + 6 * (100vw - 280px) / 320);
-    height: calc(10px + 6 * (100vw - 280px) / 320);
     font-size: 20px;
   }
 
@@ -2310,6 +2312,10 @@ svg {
   .contact__body {
     flex-direction: column;
     width: 100%;
+  }
+
+  .area {
+    min-height: 100px;
   }
 
   .page {
