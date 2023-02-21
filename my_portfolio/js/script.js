@@ -14,61 +14,68 @@ testWebP(function (support) {
     document.querySelector("body").classList.add("no-webp");
   }
 });
-var burgerBtn = document.querySelector(".header__menu_icon");
-var btnLines = burgerBtn.querySelectorAll("span");
-var navbar = document.querySelector(".header__nav");
-burgerBtn.addEventListener("click", function () {
-  if (!navbar.classList.contains("toggle")) {
-    navbar.classList.add("toggle");
-    document.body.style.overflow = "hidden";
-    btnLines[0].classList.add("first_line");
-    btnLines[2].classList.add("second_line");
-    btnLines[1].classList.add("third_line");
-  } else {
-    navbar.classList.remove("toggle");
-    document.body.style.overflow = "";
-    btnLines[0].classList.remove("first_line");
-    btnLines[2].classList.remove("second_line");
-    btnLines[1].classList.remove("third_line");
-  }
-});
+
+// let burgerBtn = document.querySelector(".header__menu_icon");
+// let btnLines = burgerBtn.querySelectorAll("span");
+
+// let navbar = document.querySelector(".header__nav");
+
+// burgerBtn.addEventListener("click", function () {
+//   if (!navbar.classList.contains("toggle")) {
+//     navbar.classList.add("toggle");
+//     document.body.style.overflow = "hidden";
+//     btnLines[0].classList.add("first_line");
+//     btnLines[2].classList.add("second_line");
+//     btnLines[1].classList.add("third_line");
+//   } else {
+//     navbar.classList.remove("toggle");
+//     document.body.style.overflow = "";
+//     btnLines[0].classList.remove("first_line");
+//     btnLines[2].classList.remove("second_line");
+//     btnLines[1].classList.remove("third_line");
+//   }
+// });
 
 // //burger--------------------------------------
 
-// function burgerMenu() {
-//   const burgerBtn = document.querySelector(".header__menu_icon"),
-//     btnLines = burgerBtn.querySelectorAll("span"),
-//     body = document.querySelector("body"),
-//     navbar = document.querySelector(".header__nav");
-
-//   navbar.addEventListener('click', () => {
-//     navbar.classList.remove("active");
-//     body.classList.remove("blocked");
-//     btnLines.forEach((line) => line.classList.remove("active-burger")); 
-//   })
-
-//   burgerBtn.addEventListener("click", function () {
-//     if (!navbar.classList.contains("active")) {
-//       navbar.classList.add("active");
-//       btnLines.forEach((line) => line.classList.add("active-burger"));
-//       body.classList.add("blocked"); 
-//     } else {
-//       navbar.classList.remove("active");
-//       body.classList.remove("blocked");
-//       btnLines.forEach((line) => line.classList.remove("active-burger"));
-//     }
-//   });
-
-//   window.addEventListener("resize", () => {
-//     if (window.innerWidth > 764) {
-//       navbar.classList.remove("active");
-//       body.classList.remove("blocked"); 
-//       btnLines.forEach((line) => line.classList.remove("active-burger"));
-//     }
-//   });
-// }
-
-// burgerMenu();
+function burgerMenu() {
+  var burgerBtn = document.querySelector(".header__menu_icon"),
+    btnLines = burgerBtn.querySelectorAll("span"),
+    body = document.querySelector("body"),
+    navbar = document.querySelector(".header__nav");
+  navbar.addEventListener('click', function () {
+    navbar.classList.remove("active");
+    body.classList.remove("blocked");
+    btnLines.forEach(function (line) {
+      return line.classList.remove("active-burger");
+    });
+  });
+  burgerBtn.addEventListener("click", function () {
+    if (!navbar.classList.contains("active")) {
+      navbar.classList.add("active");
+      btnLines.forEach(function (line) {
+        return line.classList.add("active-burger");
+      });
+      body.classList.add("blocked");
+    } else {
+      navbar.classList.remove("active");
+      body.classList.remove("blocked");
+      btnLines.forEach(function (line) {
+        return line.classList.remove("active-burger");
+      });
+    }
+  });
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 764) {
+      navbar.classList.remove("active");
+      body.classList.remove("blocked");
+      btnLines.forEach(function (line) {
+        return line.classList.remove("active-burger");
+      });
+    }
+  });
+}
+burgerMenu();
 // //-----------------------------------------------
 
 //toTopButton
@@ -111,7 +118,7 @@ function progress() {
   });
 }
 
-//slider -----------------
+//slider --------------------------------------------------
 var prev_btn = document.querySelector(".prev"),
   next_btn = document.querySelector(".next"),
   slider_window = document.querySelector(".slider__window"),
@@ -123,22 +130,22 @@ var prev_btn = document.querySelector(".prev"),
   height = window.getComputedStyle(slider_window).height;
 var width = window.getComputedStyle(slider_window).offsetWidth;
 var data = [{
-  thumbnail: "./img/paracell.jpg",
+  thumbnail: "../img/paracell.jpg",
   title: "ToDoList",
   description: "Small project to show JavaScript knowedges",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
 }, {
-  thumbnail: "./img/paracell.jpg",
+  thumbnail: "../img/paracell.jpg",
   title: "Jhon's resume",
   description: "Site width some sites.More then landing page",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
 }, {
-  thumbnail: "./img/paracell.jpg",
+  thumbnail: "../img/paracell.jpg",
   title: "Avilio",
   description: "Take you way",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
 }, {
-  thumbnail: "./img/paracell.jpg",
+  thumbnail: "../img/paracell.jpg",
   title: "Build company",
   description: "Just buil it!",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
@@ -258,3 +265,86 @@ function activeDots() {
   allDots[index - 1].classList.add("dots__active");
 }
 activeDots();
+//slide-end-------------------------------------------------------------
+
+// form----------------------------------------------
+var inputs = document.querySelectorAll('.form__input');
+inputs.forEach(function (el) {
+  var label = el.previousElementSibling;
+  el.addEventListener('focus', function () {
+    label.classList.add("active_label");
+  });
+});
+inputs.forEach(function (el) {
+  var label = el.previousElementSibling;
+  el.addEventListener("focusout", function () {
+    el.value = el.value.replaceAll(/[<]/gi, "&#60;").trimStart();
+    if (!el.value == '') {
+      return;
+    } else {
+      label.classList.remove("active_label");
+    }
+  });
+});
+var form = document.getElementById("form");
+var pop_up = document.querySelector(".popup_main_wrapper");
+pop_up.addEventListener('click', function (e) {
+  var target = e.target;
+  if (target.getAttribute('data-modal') === 'modal') {
+    pop_up.classList.remove("popup_active");
+  }
+});
+form.addEventListener("submit", formSend);
+function formSend(e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  var error = formValidate(form);
+  if (error === 0) {
+    form.reset();
+    var _inputs = document.querySelectorAll("._req");
+    _inputs.forEach(function (input) {
+      return input.previousElementSibling.classList.remove('active_label');
+    });
+    pop_up.classList.add('popup_active');
+    document.querySelector('body').style.overflow = 'hidden';
+    setTimeout(function () {
+      pop_up.classList.remove("popup_active");
+      document.querySelector("body").style.overflow = "";
+    }, 3000);
+  }
+  return false;
+}
+function formValidate(form) {
+  var error = 0;
+  var formRequired = document.querySelectorAll("._req");
+  for (var i = 0; i < formRequired.length; i++) {
+    var input = formRequired[i];
+    removeError(input);
+    if (input.classList.contains("_email")) {
+      if (emailTest(input)) {
+        addError(input);
+        error++;
+      }
+    } else {
+      if (input.value === "") {
+        addError(input);
+        error++;
+      }
+    }
+  }
+  return error;
+}
+function addError(input) {
+  input.parentElement.classList.add("_error");
+  input.classList.add("_error");
+}
+function removeError(input) {
+  input.parentElement.classList.remove("_error");
+  input.classList.remove("_error");
+}
+function emailTest(input) {
+  return !/([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])/.test(input.value);
+}
+//---------------------------------------------------------------------
+
+//popup_form----------------------------------------------------------
