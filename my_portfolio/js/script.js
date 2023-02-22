@@ -14,8 +14,6 @@ testWebP(function (support) {
     document.querySelector("body").classList.add("no-webp");
   }
 });
-
- 
 var body = document.querySelector("body");
 // //burger--------------------------------------
 
@@ -32,6 +30,7 @@ function burgerMenu() {
   });
   burgerBtn.addEventListener("click", function () {
     if (!navbar.classList.contains("active")) {
+      burgerBtn.style.margin = '10px 26px 0 0';
       navbar.classList.add("active");
       btnLines.forEach(function (line) {
         return line.classList.add("active-burger");
@@ -39,6 +38,7 @@ function burgerMenu() {
       body.classList.add("blocked");
     } else {
       navbar.classList.remove("active");
+      burgerBtn.style.margin = "10px 15px 0 0";
       body.classList.remove("blocked");
       btnLines.forEach(function (line) {
         return line.classList.remove("active-burger");
@@ -163,7 +163,7 @@ if (data_length < 10) {
   total.textContent = data_length;
   current.textContent = index;
 }
-slider_line.style.transition = "all 0.4s";
+slider_line.style.transition = "all 1s ease";
 slides.forEach(function (el) {
   el.style.width = width + "px";
   el.style.height = height + "px";
@@ -172,6 +172,8 @@ description_item.forEach(function (el) {
   el.style.width = width + "px";
   el.style.height = height + "px";
 });
+
+//make size fof all images
 function makeSize() {
   width = slider_window.offsetWidth;
   slides.forEach(function (el) {
@@ -183,6 +185,8 @@ function makeSize() {
 }
 makeSize();
 window.addEventListener("resize", makeSize);
+
+//move_slider
 function rollSlider() {
   slider_line.style.transform = "translateX(-".concat(offset * width, "px)");
 }
@@ -226,23 +230,46 @@ prev_btn.addEventListener("click", function () {
   rollSlider();
   activeDots();
 });
+
+//dots---------------------------------------------
+var dotsArray = [];
 function renderDots(length, container) {
   var dot;
-  for (var i = 0; i < length; i++) {
-    dot = createDots();
+  for (var i = length; i > 0; i--) {
+    dot = createDots(i);
+    dotsArray.push(dot);
     container.insertAdjacentHTML("afterbegin", dot);
   }
 }
-function createDots() {
-  return "<div class=\"dots dots__outside\">\n            <div class=\"dots__inside\"></div>\n          </div>";
+function createDots(index) {
+  return "<div class=\"dots dots__outside\" data-slide-to=".concat(index, ">\n            <div class=\"dots__inside\"></div>\n          </div>");
 }
 renderDots(data_length, dots);
-var allDots = document.querySelectorAll(".dots__inside");
-function activeDots() {
-  allDots.forEach(function (el) {
-    return el.classList.remove("dots__active");
+var insideDots = document.querySelectorAll(".dots__inside");
+var outsideDots = document.querySelectorAll('.dots__outside');
+var slideTo;
+outsideDots.forEach(function (dot) {
+  dot.addEventListener('click', function (e) {
+    slideTo = e.target.getAttribute('data-slide-to');
+    index = slideTo;
+    offset = slideTo - 1;
+    if (index > outsideDots.length - 1 || index < 0) {
+      index = slideTo;
+    }
+    if (data_length < 10) {
+      current.textContent = "0".concat(index, "/");
+    } else {
+      current.textContent = index;
+    }
+    rollSlider();
+    activeDots();
   });
-  allDots[index - 1].classList.add("dots__active");
+});
+function activeDots() {
+  insideDots.forEach(function (el) {
+    el.classList.remove("dots__active");
+  });
+  insideDots[index - 1].classList.add("dots__active");
 }
 activeDots();
 //slide-end-------------------------------------------------------------
