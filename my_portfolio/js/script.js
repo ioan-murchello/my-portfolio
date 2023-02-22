@@ -15,14 +15,34 @@ testWebP(function (support) {
   }
 });
 
+// let burgerBtn = document.querySelector(".header__menu_icon");
+// let btnLines = burgerBtn.querySelectorAll("span");
+
+// let navbar = document.querySelector(".header__nav");
+
+// burgerBtn.addEventListener("click", function () {
+//   if (!navbar.classList.contains("toggle")) {
+//     navbar.classList.add("toggle");
+//     document.body.style.overflow = "hidden";
+//     btnLines[0].classList.add("first_line");
+//     btnLines[2].classList.add("second_line");
+//     btnLines[1].classList.add("third_line");
+//   } else {
+//     navbar.classList.remove("toggle");
+//     document.body.style.overflow = "";
+//     btnLines[0].classList.remove("first_line");
+//     btnLines[2].classList.remove("second_line");
+//     btnLines[1].classList.remove("third_line");
+//   }
+// });
+var body = document.querySelector("body");
 // //burger--------------------------------------
 
 function burgerMenu() {
   var burgerBtn = document.querySelector(".header__menu_icon"),
     btnLines = burgerBtn.querySelectorAll("span"),
-    body = document.querySelector("body"),
     navbar = document.querySelector(".header__nav");
-  navbar.addEventListener('click', function () {
+  navbar.addEventListener("click", function () {
     navbar.classList.remove("active");
     body.classList.remove("blocked");
     btnLines.forEach(function (line) {
@@ -45,7 +65,7 @@ function burgerMenu() {
     }
   });
   window.addEventListener("resize", function () {
-    if (window.innerWidth > 764) {
+    if (window.innerWidth > 766) {
       navbar.classList.remove("active");
       body.classList.remove("blocked");
       btnLines.forEach(function (line) {
@@ -246,11 +266,21 @@ function activeDots() {
 activeDots();
 //slide-end-------------------------------------------------------------
 
+//popup-------------------------------------
+var flag = false;
+var pop_up = document.querySelector(".popup_main_wrapper");
+pop_up.addEventListener("click", function (e) {
+  if (e.target.getAttribute("data-modal") === "close") {
+    pop_up.classList.remove("popup_active");
+    body.style.overflow = '';
+  }
+});
+
 // form----------------------------------------------
-var inputs = document.querySelectorAll('.form__input');
+var inputs = document.querySelectorAll(".form__input");
 inputs.forEach(function (el) {
   var label = el.previousElementSibling;
-  el.addEventListener('focus', function () {
+  el.addEventListener("focus", function () {
     label.classList.add("active_label");
   });
 });
@@ -258,7 +288,7 @@ inputs.forEach(function (el) {
   var label = el.previousElementSibling;
   el.addEventListener("focusout", function () {
     el.value = el.value.replaceAll(/[<]/gi, "&#60;").trimStart();
-    if (!el.value == '') {
+    if (!el.value == "") {
       return;
     } else {
       label.classList.remove("active_label");
@@ -266,13 +296,6 @@ inputs.forEach(function (el) {
   });
 });
 var form = document.getElementById("form");
-var pop_up = document.querySelector(".popup_main_wrapper");
-pop_up.addEventListener('click', function (e) {
-  var target = e.target;
-  if (target.getAttribute('data-modal') === 'modal') {
-    pop_up.classList.remove("popup_active");
-  }
-});
 form.addEventListener("submit", formSend);
 function formSend(e) {
   e.preventDefault();
@@ -282,14 +305,14 @@ function formSend(e) {
     form.reset();
     var _inputs = document.querySelectorAll("._req");
     _inputs.forEach(function (input) {
-      return input.previousElementSibling.classList.remove('active_label');
+      return input.previousElementSibling.classList.remove("active_label");
     });
-    pop_up.classList.add('popup_active');
-    document.querySelector('body').style.overflow = 'hidden';
+    pop_up.classList.add("popup_active");
+    body.style.overflow = "hidden";
     setTimeout(function () {
       pop_up.classList.remove("popup_active");
-      document.querySelector("body").style.overflow = "";
-    }, 3000);
+      body.style.overflow = "";
+    }, 2000);
   }
   return false;
 }
@@ -325,5 +348,3 @@ function emailTest(input) {
   return !/([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])/.test(input.value);
 }
 //---------------------------------------------------------------------
-
-//popup_form----------------------------------------------------------
