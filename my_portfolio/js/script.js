@@ -30,7 +30,6 @@ function burgerMenu() {
   });
   burgerBtn.addEventListener("click", function () {
     if (!navbar.classList.contains("active")) {
-      burgerBtn.style.margin = '10px 26px 0 0';
       navbar.classList.add("active");
       btnLines.forEach(function (line) {
         return line.classList.add("active-burger");
@@ -38,7 +37,6 @@ function burgerMenu() {
       body.classList.add("blocked");
     } else {
       navbar.classList.remove("active");
-      burgerBtn.style.margin = "10px 15px 0 0";
       body.classList.remove("blocked");
       btnLines.forEach(function (line) {
         return line.classList.remove("active-burger");
@@ -99,7 +97,8 @@ function progress() {
 }
 
 //slider --------------------------------------------------
-var prev_btn = document.querySelector(".prev"),
+var navigate_btns = document.querySelector(".navigate__btns"),
+  prev_btn = document.querySelector(".prev"),
   next_btn = document.querySelector(".next"),
   slider_window = document.querySelector(".slider__window"),
   slider_main = document.querySelector(".background__image"),
@@ -110,25 +109,30 @@ var prev_btn = document.querySelector(".prev"),
   height = window.getComputedStyle(slider_window).height;
 var width = window.getComputedStyle(slider_window).offsetWidth;
 var data = [{
-  thumbnail: "./img/paracell.jpg",
+  thumbnail: "../img/paracell.jpg",
+  title: "Paracell",
+  description: "Creative landing page",
+  url: "https://ioan-murchello.github.io/paracell/"
+}, {
+  thumbnail: "../img/todolist.jpg",
   title: "ToDoList",
-  description: "Small project to show JavaScript knowedges",
-  url: "https://ioan-murchello.github.io/johns-portfolio/"
+  description: "A todo list is a simple application that allows users to create and manage a list of tasks or items they need to complete. ",
+  url: "https://ioan-murchello.github.io/toDoList/toDoList/"
 }, {
-  thumbnail: "./img/paracell.jpg",
+  thumbnail: "../img/jhon's-site.jpg",
   title: "Jhon's resume",
-  description: "Site width some sites.More then landing page",
+  description: "Site for Jhon's presentation",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
 }, {
-  thumbnail: "./img/paracell.jpg",
-  title: "Avilio",
-  description: "Take you way",
-  url: "https://ioan-murchello.github.io/johns-portfolio/"
+  thumbnail: "../img/typing-trainer.jpg",
+  title: "Typing trainer",
+  description: "A simulator that every novice developer should have.(in developent)",
+  url: "https://ioan-murchello.github.io/typing-trainer/keyTraniner/"
 }, {
-  thumbnail: "./img/paracell.jpg",
-  title: "Build company",
-  description: "Just buil it!",
-  url: "https://ioan-murchello.github.io/johns-portfolio/"
+  thumbnail: "../img/avilio-site.jpg",
+  title: "Take your way",
+  description: "Landing page",
+  url: "https://ioan-murchello.github.io/aviliosite/"
 }];
 
 // render slides
@@ -149,10 +153,23 @@ function renderSlide(_ref) {
     title = _ref.title,
     description = _ref.description,
     url = _ref.url;
-  return "<div class=\"slider__image-wrapper\">\n                <img src=".concat(thumbnail, " alt=\"image\" />\n              </div>\n              <div class=\"slider__description\">\n                <div class=\"slider__description-title\">").concat(title, "</div>\n                <div class=\"slider__description-text\">\n                  ").concat(description, "\n                </div>\n                <a href=").concat(url, " class=\"slider__description-btn btn\"\n                  >Open\n                  <svg\n                    width=\"12\"\n                    height=\"12\"\n                    viewBox=\"0 0 12 12\"\n                    fill=\"none\"\n                    xmlns=\"http://www.w3.org/2000/svg\"\n                  >\n                    <path\n                      d=\"M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z\"\n                      fill=\"white\"\n                    />\n                  </svg>\n                </a>\n              </div>\n             ");
+  return "<div class=\"slider__image-wrapper\">\n                <img src=".concat(thumbnail, " alt=\"image\" />\n              </div>\n              <div class=\"slider__description\">\n                <div class=\"slider__description-title\">").concat(title, "</div>\n                <div class=\"slider__description-text\">\n                  ").concat(description, "\n                </div>\n                <a href=").concat(url, " target=\"_blank\" class=\"slider__description-btn btn\"\n                  >Open\n                  <svg\n                    width=\"12\"\n                    height=\"12\"\n                    viewBox=\"0 0 12 12\"\n                    fill=\"none\"\n                    xmlns=\"http://www.w3.org/2000/svg\"\n                  >\n                    <path\n                      d=\"M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z\"\n                      fill=\"white\"\n                    />\n                  </svg>\n                </a>\n              </div>\n             ");
 }
 var slides = document.querySelectorAll(".slider__body-item");
 var description_item = document.querySelectorAll(".slider__description");
+//resize description blocks
+function resizer() {
+  var heithNums = [];
+  var height;
+  description_item.forEach(function (el) {
+    heithNums.push(el.offsetHeight);
+  });
+  height = Math.max.apply(Math, heithNums);
+  description_item.forEach(function (el) {
+    return el.style.height = height + "px";
+  });
+}
+resizer();
 var index = 1;
 var offset = 0;
 var data_length = data.length;
@@ -163,7 +180,7 @@ if (data_length < 10) {
   total.textContent = data_length;
   current.textContent = index;
 }
-slider_line.style.transition = "all 1s ease";
+slider_line.style.transition = "all 0.5s";
 slides.forEach(function (el) {
   el.style.width = width + "px";
   el.style.height = height + "px";
@@ -198,6 +215,9 @@ next_btn.addEventListener("click", function () {
   } else {
     offset++;
   }
+  if (index > offset) {
+    index = 0;
+  }
   if (index === data_length) {
     index = 1;
   } else {
@@ -209,7 +229,7 @@ next_btn.addEventListener("click", function () {
     current.textContent = index;
   }
   rollSlider();
-  activeDots();
+  activeDots(index);
 });
 prev_btn.addEventListener("click", function () {
   if (offset <= 0) {
@@ -222,13 +242,16 @@ prev_btn.addEventListener("click", function () {
   } else {
     index--;
   }
+  if (index < offset) {
+    index = data_length;
+  }
   if (slides.length < 10) {
     current.textContent = "0".concat(index, "/");
   } else {
     current.textContent = index;
   }
   rollSlider();
-  activeDots();
+  activeDots(index);
 });
 
 //dots---------------------------------------------
@@ -247,31 +270,38 @@ function createDots(index) {
 renderDots(data_length, dots);
 var insideDots = document.querySelectorAll(".dots__inside");
 var outsideDots = document.querySelectorAll('.dots__outside');
-var slideTo;
 outsideDots.forEach(function (dot) {
   dot.addEventListener('click', function (e) {
-    slideTo = e.target.getAttribute('data-slide-to');
+    var slideTo;
+    var target = e.target;
+    var attr = target.getAttribute("data-slide-to");
+    console.log(attr);
+    slideTo = attr;
     index = slideTo;
     offset = slideTo - 1;
-    if (index > outsideDots.length - 1 || index < 0) {
-      index = slideTo;
-    }
     if (data_length < 10) {
       current.textContent = "0".concat(index, "/");
     } else {
       current.textContent = index;
     }
     rollSlider();
-    activeDots();
+    activeDots(attr);
   });
 });
-function activeDots() {
+function activeDots(index) {
   insideDots.forEach(function (el) {
     el.classList.remove("dots__active");
   });
   insideDots[index - 1].classList.add("dots__active");
 }
-activeDots();
+activeDots(index);
+function getActiveIndex() {
+  return Array.from(insideDots).findIndex(function (item) {
+    item.classList.contains("dots__active");
+    console.log(item);
+  });
+}
+getActiveIndex();
 //slide-end-------------------------------------------------------------
 
 //popup-------------------------------------
