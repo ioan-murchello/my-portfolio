@@ -109,27 +109,27 @@ var navigate_btns = document.querySelector(".navigate__btns"),
   height = window.getComputedStyle(slider_window).height;
 var width = window.getComputedStyle(slider_window).offsetWidth;
 var data = [{
-  thumbnail: "../img/paracell.jpg",
+  thumbnail: "./img/paracell.jpg",
   title: "Paracell",
   description: "Creative landing page",
   url: "https://ioan-murchello.github.io/paracell/"
 }, {
-  thumbnail: "../img/todolist.jpg",
+  thumbnail: "./img/todolist.jpg",
   title: "ToDoList",
   description: "A todo list is a simple application that allows users to create and manage a list of tasks or items they need to complete. ",
   url: "https://ioan-murchello.github.io/toDoList/toDoList/"
 }, {
-  thumbnail: "../img/jhon's-site.jpg",
+  thumbnail: "./img/jhon's-site.jpg",
   title: "Jhon's resume",
   description: "Site for Jhon's presentation",
   url: "https://ioan-murchello.github.io/johns-portfolio/"
 }, {
-  thumbnail: "../img/typing-trainer.jpg",
+  thumbnail: "./img/typing-trainer.jpg",
   title: "Typing trainer",
   description: "A simulator that every novice developer should have.(in developent)",
   url: "https://ioan-murchello.github.io/typing-trainer/keyTraniner/"
 }, {
-  thumbnail: "../img/avilio-site.jpg",
+  thumbnail: "./img/avilio-site.jpg",
   title: "Take your way",
   description: "Landing page",
   url: "https://ioan-murchello.github.io/aviliosite/"
