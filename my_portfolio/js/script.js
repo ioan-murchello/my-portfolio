@@ -148,7 +148,6 @@ function renderSlides(arr, container) {
   }
 }
 renderSlides(data, slider_line);
-
 function renderSlide(_ref) {
   var thumbnail = _ref.thumbnail,
     title = _ref.title,
@@ -156,8 +155,6 @@ function renderSlide(_ref) {
     url = _ref.url;
   return "<div class=\"slider__image-wrapper\">\n                <img src=".concat(thumbnail, " alt=\"image\" />\n              </div>\n              <div class=\"slider__description\">\n                <div class=\"slider__description-title\">").concat(title, "</div>\n                <div class=\"slider__description-text\">\n                  ").concat(description, "\n                </div>\n                <a href=").concat(url, " target=\"_blank\" class=\"slider__description-btn btn\"\n                  >Open\n                  <svg\n                    width=\"12\"\n                    height=\"12\"\n                    viewBox=\"0 0 12 12\"\n                    fill=\"none\"\n                    xmlns=\"http://www.w3.org/2000/svg\"\n                  >\n                    <path\n                      d=\"M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z\"\n                      fill=\"white\"\n                    />\n                  </svg>\n                </a>\n              </div>\n             ");
 }
-
-
 var slides = document.querySelectorAll(".slider__body-item");
 var description_item = document.querySelectorAll(".slider__description");
 //resize description blocks
@@ -173,7 +170,6 @@ function resizer() {
   });
 }
 resizer();
-
 var index = 1;
 var offset = 0;
 var data_length = data.length;
@@ -194,7 +190,7 @@ description_item.forEach(function (el) {
   el.style.height = height + "px";
 });
 
-//make size for all images
+//make size fof all images
 function makeSize() {
   width = slider_window.offsetWidth;
   slides.forEach(function (el) {

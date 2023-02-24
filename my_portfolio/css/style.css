@@ -530,7 +530,6 @@
 .header__menu_icon {
   position: fixed;
   display: flex;
-  margin: 10px 15px 0 0;
   flex-direction: column;
   z-index: 600;
   transition: margin 0.3s ease;
@@ -961,9 +960,9 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  max-width: 194px;
   color: #fff;
   padding: 15px 20px;
-  width: 190px;
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -1622,7 +1621,7 @@ svg path {
   padding: 0 0 0 10px;
 }
 
-._info div {
+._info ._info-title {
   font-size: 24px;
   font-weight: 600;
   padding: 0 0 6px 0;
@@ -1994,6 +1993,7 @@ svg {
     top: 15px;
     left: 15px;
     color: #fff;
+    font-size: 24px;
   }
 
   .header__nav {
@@ -2029,11 +2029,11 @@ svg {
   }
 
   .header__li {
-    margin: 0 0 24px 0;
+    margin: 0 0 6px 0;
   }
 
   .header__links {
-    font-size: 33px;
+    font-size: 22px;
     color: #c3c3c3;
   }
 
@@ -2099,10 +2099,6 @@ svg {
     right: 15px;
   }
 
-  .contact {
-    padding: 60px 0 0 0;
-  }
-
   .contact__wrapper {
     display: flex;
     justify-content: center;
@@ -2158,12 +2154,12 @@ svg {
 
   .slider__image-wrapper {
     width: 100%;
-    height: 80%;
+    height: 60%;
   }
 
   .slider__description {
     justify-content: flex-start;
-    padding: 38px 0 0 0;
+    padding: 22px 0 0 0;
     max-width: 100%;
     height: 60%;
   }
@@ -2177,7 +2173,7 @@ svg {
   }
 
   .navigate__btns {
-    top: -364px;
+    top: -376px;
   }
 
   .navigate__btns div {
@@ -2190,12 +2186,12 @@ svg {
 
   .navigate__dots {
     left: 0;
-    top: -170px;
+    top: -200px;
   }
 
   .navigate__dots .dots__outside {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   .hello {
@@ -2217,7 +2213,7 @@ svg {
   .hello__btn {
     font-size: 16px;
     padding: 12px 10px;
-    width: 160px;
+    max-width: none;
   }
 
   .hello__avatar {
@@ -2257,11 +2253,19 @@ svg {
   }
 
   .skills__body-title {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .skills__body-info {
+    font-size: 16px;
   }
 
   .skills__body-percent {
     font-size: 16px;
+  }
+
+  .contact {
+    padding: 0 0 0 0;
   }
 
   .contact__body {
@@ -2269,29 +2273,47 @@ svg {
     width: 100%;
   }
 
+  .contact__info svg {
+    width: 45px;
+    height: 37px;
+  }
+
   .area {
-    min-height: 100px;
+    min-height: 90px;
   }
 
   .form__input {
-    padding: 22px 10px;
+    padding: 19px 10px;
     font-size: 16px;
   }
 
   .form__label {
-    font-size: 14px;
+    font-size: 12px;
+    transform: translate(10px, 9px);
+    -webkit-transform: translate(10px, 9px);
+    -moz-transform: translate(10px, 9px);
+    -ms-transform: translate(10px, 9px);
+    -o-transform: translate(10px, 9px);
+  }
+
+  .active_label {
+    transform: translate(10px, -12px);
+    -webkit-transform: translate(10px, -12px);
+    -moz-transform: translate(10px, -12px);
+    -ms-transform: translate(10px, -12px);
+    -o-transform: translate(10px, -12px);
   }
 
   .button__form {
     font-size: 16px;
   }
 
-  ._info div {
-    font-size: 22px;
+  ._info ._info-title {
+    font-size: 19px;
   }
 
   ._info {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .page {
