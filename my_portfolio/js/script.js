@@ -126,7 +126,7 @@ var data = [{
 }, {
   thumbnail: "./img/typing-trainer.jpg",
   title: "Typing trainer",
-  description: "A simulator that every novice developer should have.(in developent)",
+  description: "A simulator that every novice developer should have.Only for PC(in developent)",
   url: "https://ioan-murchello.github.io/typing-trainer/keyTraniner/"
 }, {
   thumbnail: "./img/avilio-site.jpg",
@@ -148,6 +148,7 @@ function renderSlides(arr, container) {
   }
 }
 renderSlides(data, slider_line);
+
 function renderSlide(_ref) {
   var thumbnail = _ref.thumbnail,
     title = _ref.title,
@@ -155,6 +156,8 @@ function renderSlide(_ref) {
     url = _ref.url;
   return "<div class=\"slider__image-wrapper\">\n                <img src=".concat(thumbnail, " alt=\"image\" />\n              </div>\n              <div class=\"slider__description\">\n                <div class=\"slider__description-title\">").concat(title, "</div>\n                <div class=\"slider__description-text\">\n                  ").concat(description, "\n                </div>\n                <a href=").concat(url, " target=\"_blank\" class=\"slider__description-btn btn\"\n                  >Open\n                  <svg\n                    width=\"12\"\n                    height=\"12\"\n                    viewBox=\"0 0 12 12\"\n                    fill=\"none\"\n                    xmlns=\"http://www.w3.org/2000/svg\"\n                  >\n                    <path\n                      d=\"M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z\"\n                      fill=\"white\"\n                    />\n                  </svg>\n                </a>\n              </div>\n             ");
 }
+
+
 var slides = document.querySelectorAll(".slider__body-item");
 var description_item = document.querySelectorAll(".slider__description");
 //resize description blocks
@@ -170,6 +173,7 @@ function resizer() {
   });
 }
 resizer();
+
 var index = 1;
 var offset = 0;
 var data_length = data.length;
@@ -190,7 +194,7 @@ description_item.forEach(function (el) {
   el.style.height = height + "px";
 });
 
-//make size fof all images
+//make size for all images
 function makeSize() {
   width = slider_window.offsetWidth;
   slides.forEach(function (el) {
@@ -265,17 +269,16 @@ function renderDots(length, container) {
   }
 }
 function createDots(index) {
-  return "<div class=\"dots dots__outside\" data-slide-to=".concat(index, ">\n            <div class=\"dots__inside\"></div>\n          </div>");
+  return "<div class=\"dots dots__outside\" data-slide-to=".concat(index, ">\n            <div class=\"dots__inside\" data-slide-to=").concat(index, "></div>\n          </div>");
 }
 renderDots(data_length, dots);
 var insideDots = document.querySelectorAll(".dots__inside");
-var outsideDots = document.querySelectorAll('.dots__outside');
+var outsideDots = document.querySelectorAll(".dots__outside");
 outsideDots.forEach(function (dot) {
-  dot.addEventListener('click', function (e) {
+  dot.addEventListener("click", function (e) {
     var slideTo;
     var target = e.target;
     var attr = target.getAttribute("data-slide-to");
-    console.log(attr);
     slideTo = attr;
     index = slideTo;
     offset = slideTo - 1;
@@ -290,18 +293,16 @@ outsideDots.forEach(function (dot) {
 });
 function activeDots(index) {
   insideDots.forEach(function (el) {
-    el.classList.remove("dots__active");
+    if (el.classList.contains("dots__active")) {
+      el.classList.remove("dots__active");
+    }
+    if (el.dataset.slideTo == index) {
+      el.classList.add("dots__active");
+    }
   });
-  insideDots[index - 1].classList.add("dots__active");
 }
 activeDots(index);
-function getActiveIndex() {
-  return Array.from(insideDots).findIndex(function (item) {
-    item.classList.contains("dots__active");
-    console.log(item);
-  });
-}
-getActiveIndex();
+
 //slide-end-------------------------------------------------------------
 
 //popup-------------------------------------
@@ -310,7 +311,7 @@ var pop_up = document.querySelector(".popup_main_wrapper");
 pop_up.addEventListener("click", function (e) {
   if (e.target.getAttribute("data-modal") === "close") {
     pop_up.classList.remove("popup_active");
-    body.style.overflow = '';
+    body.style.overflow = "";
   }
 });
 
