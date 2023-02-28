@@ -83,19 +83,6 @@ function toTop() {
 }
 toTop();
 
-//  progressBar-------------------------------------
-function progress() {
-  var loadLine = document.querySelectorAll(".progress_line div");
-  var percent = document.querySelectorAll(".skills__body-info");
-  var sums = [];
-  for (var i = 0; i < percent.length; i++) {
-    sums.push(percent[i].textContent.slice(0, -1));
-  }
-  loadLine.forEach(function (el, index) {
-    el.style.width = sums[index] + "%";
-  });
-}
-
 //slider --------------------------------------------------
 var navigate_btns = document.querySelector(".navigate__btns"),
   prev_btn = document.querySelector(".prev"),
@@ -173,6 +160,13 @@ resizer();
 var index = 1;
 var offset = 0;
 var data_length = data.length;
+function moreThen10(arrLength, current, index) {
+  if (arrLength < 10) {
+    current.textContent = "0".concat(index, "/");
+  } else {
+    current.textContent = index;
+  }
+}
 if (data_length < 10) {
   total.textContent = "0".concat(data_length);
   current.textContent = "0".concat(index, "/");
@@ -223,11 +217,7 @@ next_btn.addEventListener("click", function () {
   } else {
     index++;
   }
-  if (data_length < 10) {
-    current.textContent = "0".concat(index, "/");
-  } else {
-    current.textContent = index;
-  }
+  moreThen10(data_length, current, index);
   rollSlider();
   activeDots(index);
 });
@@ -245,14 +235,53 @@ prev_btn.addEventListener("click", function () {
   if (index < offset) {
     index = data_length;
   }
-  if (slides.length < 10) {
-    current.textContent = "0".concat(index, "/");
-  } else {
-    current.textContent = index;
-  }
+  moreThen10(data_length, current, index);
   rollSlider();
   activeDots(index);
 });
+
+//swipe handler for slider-------------------------
+//   let startX = 0;
+//   let startY = 0;
+//   let distX = 0;
+//   let distY = 0;
+//   let threshold = width / 3;
+//   let allowedTime = 300;
+//   let elapsedTime = 0;
+//   let startTime = 0;
+
+//   slider_window.addEventListener("touchstart", function (e) {
+//     startX = Math.floor(e.changedTouches[0].pageX);
+//     startY = Math.floor(e.changedTouches[0].pageY);
+//     startTime = new Date().getTime();
+//     console.log(startX, startY);
+//     e.preventDefault();
+//   });
+
+//   slider_window.addEventListener("touchmove", function (e) {
+//     distX = Math.floor(e.changedTouches[0].pageX) - startX;
+//     distY = Math.floor(e.changedTouches[0].pageY) - startY;
+//     elapsedTime = new Date().getTime() - startTime;
+//     if (elapsedTime <= allowedTime && Math.abs(distX) > Math.abs(distY)) {
+//       e.preventDefault();
+//       slider_line.style.transform =
+//         "translateX(" + (-(index * width) + distX) + "px)";
+//     }
+//   });
+
+//   slider_window.addEventListener("touchend", function (e) {
+//     if (Math.abs(distX) > threshold && elapsedTime <= allowedTime) {
+//       if (distX > 0 && index > 0) {
+//         index--;
+//       } else if (distX < 0 && index < data_length.length - 1) {
+//         index++;
+//       }
+//     }
+//     slider_line.style.transform =
+//       "translateX(" + -(index * width) + "px)";
+//       activeDots(index)
+//   });
+// //-------------------------------------------------
 
 //dots---------------------------------------------
 var dotsArray = [];
@@ -302,7 +331,7 @@ activeDots(index);
 //slide-end-------------------------------------------------------------
 
 //popup-------------------------------------
-var flag = false;
+
 var pop_up = document.querySelector(".popup_main_wrapper");
 pop_up.addEventListener("click", function (e) {
   if (e.target.getAttribute("data-modal") === "close") {
