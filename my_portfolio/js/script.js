@@ -15,109 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       document.querySelector("body").classList.add("no-webp");
     }
-  });
-
-  //theme-colors
-  const themeColors = {
-    default: {
-      "--body-color": "#4c4c4c",
-      "--bg-color": "#fff",
-      "--main-color": "#50aeff",
-      "--hover-color": "#2993ef",
-      "--sub-color": "#2993ef",
-      "--form-bg-color": "#fff",
-      "--burger-color": "#000",
-    },
-    black: {
-      "--body-color": "#a0a0a0",
-      "--bg-color": "#000",
-      "--main-color": "#2acc45",
-      "--hover-color": "#60e21f",
-      "--sub-color": "#2acc45",
-      "--form-bg-color": "#0b230e",
-      "--burger-color": "#a0a0a0",
-    },
-  };
-
-  const switcher = document.querySelectorAll(".switcher");
-  const switcherLable = document.querySelectorAll(".switcher-label");
-
-
-  switcher.forEach((el) => {
-    
-    el.addEventListener("change", (e) => {
-      document.body.style.transition = "all 0.5s ease";
-
-      setItemToLocalStorage("checked", e.target.checked); 
-
-      if (e.target.checked == true) {
-        switcherLable.forEach((label) => {
-          label.style.backgroundImage = "url(img/icons/sun_icon.svg)";
-        });
-        switcher.forEach((inp) => (inp.checked = true));
-        
-
-        onSetTheme(e.target.checked.toString(), themeColors);
-      } else {
-         
-        // switcher.forEach((inp) => (inp.checked = e.target.checked));
-
-        switcherLable.forEach((label) => {
-          label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
-        });
-        onSetTheme(e.target.checked, themeColors);
-      }
-    });
-  });
-
-  function onSetTheme(arg, objWithThems) { 
-    let getNameThemeFromObjectWithThems;
-    if (arg === 'true') {
-      getNameThemeFromObjectWithThems = objWithThems.black;
-    }
-    else{
-      getNameThemeFromObjectWithThems = objWithThems.default;
-    }
-
-    Object.entries(getNameThemeFromObjectWithThems).forEach(([key, value]) => {
-      document.documentElement.style.setProperty(key, value);
-    });
-  }
-  //----------------------------------------------
-
-  //localStorageHandlers
-  function setItemToLocalStorage(key, item) {
-    localStorage.setItem(key, item);
-  }
-
-  setItemToLocalStorage("thems", JSON.stringify(themeColors));
-
-  function getItemFromLocalStorage() {
-    let check = localStorage.getItem("checked").toString();
-    const thems = JSON.parse(localStorage.getItem("thems"));
-
-    if (check && check === 'true') {
-
-      switcher.forEach((inp) => inp.checked = true);
-
-      switcherLable.forEach((label) => {
-        label.style.backgroundImage = "url(img/icons/sun_icon.svg)";
-      });
-
-      onSetTheme(check, thems);
-
-    } else { 
-      switcherLable.forEach((label) => {
-        label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
-      });
-
-      onSetTheme(check, thems);
-    }
-  }
-
-  getItemFromLocalStorage();
-  //----------------------------------------------
-
+  }); 
+  
   //current-year----------------------------------
   var current_year = (document.querySelector(".current_year").textContent =
     new Date().getFullYear());
@@ -525,5 +424,99 @@ document.addEventListener("DOMContentLoaded", function () {
       input.value
     );
   }
+  //---------------------------------------------------------------------
+
+  //temsHandlers
+  const themeColors = {
+    default: {
+      "--body-color": "#4c4c4c",
+      "--bg-color": "#fff",
+      "--main-color": "#50aeff",
+      "--hover-color": "#2993ef",
+      "--sub-color": "#2993ef",
+      "--form-bg-color": "#fff",
+      "--burger-color": "#000",
+    },
+    black: {
+      "--body-color": "#a0a0a0",
+      "--bg-color": "#000",
+      "--main-color": "#2acc45",
+      "--hover-color": "#60e21f",
+      "--sub-color": "#2acc45",
+      "--form-bg-color": "#0b230e",
+      "--burger-color": "#a0a0a0",
+    },
+  };
+
+  const switcher = document.querySelectorAll(".switcher");
+  const switcherLable = document.querySelectorAll(".switcher-label");
+
+  switcher.forEach((el) => {
+    el.addEventListener("change", (e) => {
+      document.body.style.transition = "all 0.5s ease";
+
+      setItemToLocalStorage("checked", e.target.checked);
+
+      if (e.target.checked == true) {
+        switcherLable.forEach((label) => {
+          label.style.backgroundImage = "url(img/icons/sun_icon.svg)";
+        });
+        switcher.forEach((inp) => (inp.checked = true));
+
+        onSetTheme(e.target.checked.toString(), themeColors);
+      } else {
+        switcherLable.forEach((label) => {
+          label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
+        });
+        onSetTheme(e.target.checked, themeColors);
+      }
+    });
+  });
+
+  function onSetTheme(arg, objWithThems) {
+    let getNameThemeFromObjectWithThems;
+    if (arg === "true") {
+      getNameThemeFromObjectWithThems = objWithThems.black;
+    } else {
+      getNameThemeFromObjectWithThems = objWithThems.default;
+    }
+
+    Object.entries(getNameThemeFromObjectWithThems).forEach(([key, value]) => {
+      document.documentElement.style.setProperty(key, value);
+    });
+  }
+  //----------------------------------------------
+
+  //localStorageHandlers
+  function setItemToLocalStorage(key, item) {
+    localStorage.setItem(key, item);
+  }
+
+  setItemToLocalStorage("thems", JSON.stringify(themeColors));
+
+  function getItemFromLocalStorage() {
+    let check = localStorage.getItem("checked");
+    const thems = JSON.parse(localStorage.getItem("thems"));
+
+    if (check.toString() && check === "true") {
+      switcher.forEach((inp) => (inp.checked = true));
+
+      switcherLable.forEach((label) => {
+        label.style.backgroundImage = "url(img/icons/sun_icon.svg)";
+      });
+
+      onSetTheme(check, thems);
+    } else {
+      switcherLable.forEach((label) => {
+        label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
+      });
+
+      onSetTheme(check, thems);
+    }
+  }
+
+  getItemFromLocalStorage();
+  //----------------------------------------------
+
   //---------------------------------------------------------------------
 });
