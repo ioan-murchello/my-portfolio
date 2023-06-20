@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>HomePage</title>
   </head>
@@ -73,19 +77,22 @@
           <div class="hello__container _container">
             <ul class="hello__social-links">
               <li class="hello__social-link fade-aside">
-                <a target="_blank"
+                <a
+                  target="_blank"
                   href="https://github.com/ioan-murchello"
                   class="icon_social _icon-github"
                 ></a>
               </li>
               <li class="hello__social-link fade-aside">
-                <a target="_blank"
+                <a
+                  target="_blank"
                   href="https://www.linkedin.com/in/janos-murza-714a09265?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BYk%2BUWpCfSwqF3rIDfpvGRQ%3D%3D"
                   class="icon_social _icon-linkedin"
                 ></a>
               </li>
               <li class="hello__social-link fade-aside">
-                <a target="_blank"
+                <a
+                  target="_blank"
                   href="https://www.instagram.com/"
                   class="icon_social _icon-instagram"
                 ></a>
@@ -295,52 +302,55 @@
                 <div class="slider__sub-title sub__title">Recent works</div>
               </div>
               <div class="slider__sub-container">
-                <div class="total__slides-wrapper">
-                  <div class="total__slides-inner">
-                    <div class="current">00</div>
-                    <div class="total">00</div>
-                  </div>
-                </div>
-
                 <div class="slider__window">
-                  <div class="slider__line">
-                    <!-- <div class="slider__body-item">
-              <div class="slider__image-wrapper">
-                <picture><source srcset="../img/paracell.webp" type="image/webp"><img src="../img/paracell.jpg" alt="image" /></picture>
-              </div>
-              <div class="slider__description">
-                <div class="slider__description-title">toDoList</div>
-                <div class="slider__description-text">
-                  TodoList, small project to show javascript knowledges
-                </div>
-                <a href="#" class="slider__description-btn btn"
-                  >Open
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z"
-                      fill="white"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div> -->
-                  </div>
-                </div>
+                  <div class="swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
 
-                <div class="navigate__btns">
-                  <div class="navigate__btn-wrapper">
-                    <div class="navigate__btn prev"><</div>
-                    <div class="navigate__btn next">></div>
+                      <!-- Slides -->
+
+                      <!-- <div class="swiper-slide">
+                        <div class="slide__wrapper">
+                          <img src="img/paracell.jpg" alt="Paracell site" />
+                          <div class="description">
+                            <div class="slider__description-title">
+                              toDoList
+                            </div>
+                            <div class="slider__description-text">
+                              TodoList, small project to show javascript
+                              knowledges
+                            </div>
+                            <a href="#" class="slider__description-btn btn"
+                              >Open
+                              <svg
+                                width="12"
+                                height="12"
+                                viewBox="0 0 12 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z"
+                                  fill="white"
+                                />
+                              </svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div> -->
+                       
+                    </div>
+                    <!-- If we need pagination -->
+                    <div class="swiper-pagination"></div> 
+
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                   </div>
+                   
                 </div>
-                <div class="navigate__dots"></div>
               </div>
+ 
             </div>
           </div>
         </section>
@@ -560,5 +570,6 @@
     </div>
 
     <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   </body>
 </html>

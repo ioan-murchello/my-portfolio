@@ -15,8 +15,105 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       document.querySelector("body").classList.add("no-webp");
     }
-  }); 
-  
+  });
+
+  //theme-colors
+  const themeColors = {
+    default: {
+      "--body-color": "#4c4c4c",
+      "--bg-color": "#fff",
+      "--main-color": "#50aeff",
+      "--hover-color": "#2993ef",
+      "--sub-color": "#2993ef",
+      "--form-bg-color": "#fff",
+      "--burger-color": "#000",
+    },
+    black: {
+      "--body-color": "#a0a0a0",
+      "--bg-color": "#000",
+      "--main-color": "#2acc45",
+      "--hover-color": "#60e21f",
+      "--sub-color": "#2acc45",
+      "--form-bg-color": "#0b230e",
+      "--burger-color": "#a0a0a0",
+    },
+  };
+
+  const switcher = document.querySelectorAll(".switcher");
+  const switcherLable = document.querySelectorAll(".switcher-label");
+
+  switcher.forEach((el) => {
+    el.addEventListener("change", (e) => {
+      document.body.style.transition = "all 0.5s ease";
+
+      setItemToLocalStorage("checked", e.target.checked);
+
+      if (e.target.checked == true) {
+        switcherLable.forEach((label) => {
+          label.style.backgroundImage = "url(img/icons/sun_icon.svg)";
+        });
+        switcher.forEach((inp) => (inp.checked = true));
+
+        onSetTheme(e.target.checked.toString(), themeColors);
+      } else {
+        // switcher.forEach((inp) => (inp.checked = e.target.checked));
+
+        switcherLable.forEach((label) => {
+          label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
+        });
+        onSetTheme(e.target.checked, themeColors);
+      }
+    });
+  });
+
+  function onSetTheme(arg, objWithThems) {
+    let getNameThemeFromObjectWithThems;
+    if (arg === "true") {
+      getNameThemeFromObjectWithThems = objWithThems.black;
+    } else {
+      getNameThemeFromObjectWithThems = objWithThems.default;
+    }
+
+    Object.entries(getNameThemeFromObjectWithThems).forEach(([key, value]) => {
+      document.documentElement.style.setProperty(key, value);
+    });
+  }
+  //----------------------------------------------
+
+  //localStorageHandlers
+  function setItemToLocalStorage(key, item) {
+    localStorage.setItem(key, item);
+  }
+
+  setItemToLocalStorage("thems", JSON.stringify(themeColors));
+
+  function getItemFromLocalStorage() {
+    let check = localStorage.getItem("checked");
+    if (check) {
+      check.toString();
+    }
+    const thems = JSON.parse(localStorage.getItem("thems"));
+
+    if (check && check === "true") {
+      switcher.forEach((inp) => (inp.checked = true));
+
+      switcherLable.forEach((label) => {
+        label.style.backgroundImage = "url(img/icons/sun_icon.svg)";
+      });
+
+      onSetTheme(check, thems);
+    } else {
+      switcherLable.forEach((label) => {
+        label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
+      });
+
+      onSetTheme(check, thems);
+    }
+  }
+
+  getItemFromLocalStorage();
+  //----------------------------------------------
+
   //current-year----------------------------------
   var current_year = (document.querySelector(".current_year").textContent =
     new Date().getFullYear());
@@ -115,17 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
   toTop();
 
   //slider --------------------------------------------------
-  var navigate_btns = document.querySelector(".navigate__btns"),
-    prev_btn = document.querySelector(".prev"),
-    next_btn = document.querySelector(".next"),
-    slider_window = document.querySelector(".slider__window"),
-    slider_main = document.querySelector(".background__image"),
-    slider_line = document.querySelector(".slider__line"),
-    dots = document.querySelector(".navigate__dots"),
-    current = document.querySelector(".current"),
-    total = document.querySelector(".total"),
-    height = window.getComputedStyle(slider_window).height;
-  var width = window.getComputedStyle(slider_window).offsetWidth;
+  var slider_line = document.querySelector(".swiper-wrapper"); 
   var data = [
     {
       thumbnail: "./img/paracell.jpg",
@@ -167,22 +254,23 @@ document.addEventListener("DOMContentLoaded", function () {
     var slide_item;
     for (var i = 0; i < arr.length; i++) {
       slide_item = document.createElement("div");
-      slide_item.classList.add("slider__body-item");
+      slide_item.classList.add("swiper-slide");
       slide_body = renderSlide(arr[i]);
       slide_item.insertAdjacentHTML("afterbegin", slide_body);
       container.append(slide_item);
     }
   }
   renderSlides(data, slider_line);
+
   function renderSlide(_ref) {
     var thumbnail = _ref.thumbnail,
       title = _ref.title,
       description = _ref.description,
       url = _ref.url;
-    return '<div class="slider__image-wrapper">\n                <img src='
+    return '<div class="slider__wrapper"><img src='
       .concat(
         thumbnail,
-        ' alt="image" />\n              </div>\n              <div class="slider__description">\n                <div class="slider__description-title">'
+        ' alt="image" />\n <div class="description">\n <div class="slider__description-title">'
       )
       .concat(
         title,
@@ -191,156 +279,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .concat(description, "\n                </div>\n                <a href=")
       .concat(
         url,
-        ' target="_blank" class="slider__description-btn btn"\n                  >Open\n                  <svg\n                    width="12"\n                    height="12"\n                    viewBox="0 0 12 12"\n                    fill="none"\n                    xmlns="http://www.w3.org/2000/svg"\n                  >\n                    <path\n                      d="M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z"\n                      fill="white"\n                    />\n                  </svg>\n                </a>\n              </div>\n             '
+        ' target="_blank" class="slider__description-btn btn"\n                  >Open\n                  <svg\n                    width="12"\n                    height="12"\n                    viewBox="0 0 12 12"\n                    fill="none"\n                    xmlns="http://www.w3.org/2000/svg"\n                  >\n                    <path\n                      d="M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z"\n                      fill="white"\n                    />\n                  </svg>\n                </a>\n              </div>\n             </div>'
       );
   }
-  var slides = document.querySelectorAll(".slider__body-item");
-  var description_item = document.querySelectorAll(".slider__description");
-  //resize description blocks
-  function resizer() {
-    var heithNums = [];
-    var height;
-    description_item.forEach(function (el) {
-      heithNums.push(el.offsetHeight);
-    });
-    height = Math.max.apply(Math, heithNums);
-    description_item.forEach(function (el) {
-      return (el.style.height = height + "px");
-    });
-  }
-  resizer();
-  var index = 1;
-  var offset = 0;
-  var data_length = data.length;
-  function moreThen10(arrLength, current, index) {
-    if (arrLength < 10) {
-      current.textContent = "0".concat(index, "/");
-    } else {
-      current.textContent = index;
-    }
-  }
-  if (data_length < 10) {
-    total.textContent = "0".concat(data_length);
-    current.textContent = "0".concat(index, "/");
-  } else {
-    total.textContent = data_length;
-    current.textContent = index;
-  }
-  slider_line.style.transition = "all 0.5s";
-  slides.forEach(function (el) {
-    el.style.width = width + "px";
-    el.style.height = height + "px";
-  });
-  description_item.forEach(function (el) {
-    el.style.width = width + "px";
-    el.style.height = height + "px";
-  });
-
-  //make size for all images
-  function makeSize() {
-    width = slider_window.offsetWidth;
-    slides.forEach(function (el) {
-      el.style.width = width + "px";
-      el.style.height = height + "px";
-    });
-    slider_line.style.width = width * slides.length + "px";
-    rollSlider();
-  }
-  makeSize();
-  window.addEventListener("resize", makeSize);
-
-  //move_slider
-  function rollSlider() {
-    slider_line.style.transform = "translateX(-".concat(offset * width, "px)");
-  }
-
-  //handlers
-  next_btn.addEventListener("click", function () {
-    if (offset >= data_length - 1) {
-      offset = 0;
-    } else {
-      offset++;
-    }
-    if (index > offset) {
-      index = 0;
-    }
-    if (index === data_length) {
-      index = 1;
-    } else {
-      index++;
-    }
-    moreThen10(data_length, current, index);
-    rollSlider();
-    activeDots(index);
-  });
-  prev_btn.addEventListener("click", function () {
-    if (offset <= 0) {
-      offset = data_length - 1;
-    } else {
-      offset--;
-    }
-    if (index === 1) {
-      index = data_length;
-    } else {
-      index--;
-    }
-    if (index < offset) {
-      index = data_length;
-    }
-    moreThen10(data_length, current, index);
-    rollSlider();
-    activeDots(index);
-  });
-
-  //dots---------------------------------------------
-  var dotsArray = [];
-  function renderDots(length, container) {
-    var dot;
-    for (var i = length; i > 0; i--) {
-      dot = createDots(i);
-      dotsArray.push(dot);
-      container.insertAdjacentHTML("afterbegin", dot);
-    }
-  }
-  function createDots(index) {
-    return '<div class="dots dots__outside" data-slide-to='
-      .concat(index, '>\n            <div class="dots__inside" data-slide-to=')
-      .concat(index, "></div>\n          </div>");
-  }
-  renderDots(data_length, dots);
-  var insideDots = document.querySelectorAll(".dots__inside");
-  var outsideDots = document.querySelectorAll(".dots__outside");
-  outsideDots.forEach(function (dot) {
-    dot.addEventListener("click", function (e) {
-      var slideTo;
-      var target = e.target;
-      var attr = target.getAttribute("data-slide-to");
-      slideTo = attr;
-      index = slideTo;
-      offset = slideTo - 1;
-      if (data_length < 10) {
-        current.textContent = "0".concat(index, "/");
-      } else {
-        current.textContent = index;
-      }
-      rollSlider();
-      activeDots(attr);
-    });
-  });
-  function activeDots(index) {
-    insideDots.forEach(function (el) {
-      if (el.classList.contains("dots__active")) {
-        el.classList.remove("dots__active");
-      }
-      if (el.dataset.slideTo == index) {
-        el.classList.add("dots__active");
-      }
-    });
-  }
-  activeDots(index);
-
-  //slide-end-------------------------------------------------------------
-
+  
   //popup-------------------------------------
 
   var pop_up = document.querySelector(".popup_main_wrapper");
@@ -426,97 +368,87 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   //---------------------------------------------------------------------
 
-  //temsHandlers
-  const themeColors = {
-    default: {
-      "--body-color": "#4c4c4c",
-      "--bg-color": "#fff",
-      "--main-color": "#50aeff",
-      "--hover-color": "#2993ef",
-      "--sub-color": "#2993ef",
-      "--form-bg-color": "#fff",
-      "--burger-color": "#000",
+  //swiper
+  const swiper = new Swiper(".swiper", {
+    // Optional parameters
+    direction: "horizontal",
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    }, 
+
+    speed: 800,
+
+    direction: 'horizontal',
+
+    effect: 'slide', 
+
+    // If we need pagination
+    pagination: {
+      el: ".swiper-pagination",
+      //bullets
+      clickable: true,
+      dynamicBullets: true,
+
+      // type: 'fraction',
+      // //custom fraction
+      // renderFraction: function(currentClass, totalClass){
+      //   return `Project <span class=${currentClass}></span> from <span class=${totalClass}></span>`
+      // }
     },
-    black: {
-      "--body-color": "#a0a0a0",
-      "--bg-color": "#000",
-      "--main-color": "#2acc45",
-      "--hover-color": "#60e21f",
-      "--sub-color": "#2acc45",
-      "--form-bg-color": "#0b230e",
-      "--burger-color": "#a0a0a0",
+
+    // //scroll
+    // scrollBar: {
+    //   el: '.swiper-scrollbar',
+    //   //to drag scroll
+    //   draggable: true,
+    // },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
-  };
+    
+    // switch On, switch Off on PC
+    simulateTouch: true,
 
-  const switcher = document.querySelectorAll(".switcher");
-  const switcherLable = document.querySelectorAll(".switcher-label");
+    //swipe sensetive
+    touchRatio: 1,
 
-  switcher.forEach((el) => {
-    el.addEventListener("change", (e) => {
-      document.body.style.transition = "all 0.5s ease";
+    //swipe angle
+    touchAngle: 45,
 
-      setItemToLocalStorage("checked", e.target.checked);
+    //drag cursor
+    grabCursor: true,
 
-      if (e.target.checked == true) {
-        switcherLable.forEach((label) => {
-          label.style.backgroundImage = "url(img/icons/sun_icon.svg)";
-        });
-        switcher.forEach((inp) => (inp.checked = true));
+    //on slide click, move slide
+    slideToClickedSlide: true,
 
-        onSetTheme(e.target.checked.toString(), themeColors);
-      } else {
-        switcherLable.forEach((label) => {
-          label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
-        });
-        onSetTheme(e.target.checked, themeColors);
-      }
-    });
+    //keyboad events
+    keyboard: {
+      //on-off
+      enabled: true,
+
+      //on - only when slider inside viewport
+      onlyInViewport: true,
+
+      pageUpDown: true,
+    },
+
+    //onMouseWheel
+    // mousewheel: {
+    //   sensitivity: 1
+    // }
+
+    // slidesPerView: 1.5,
+
+    //if in slider only one slide
+    watchOverflow: true,
+
+    //margin
+    spaceBetween: 15,
   });
-
-  function onSetTheme(arg, objWithThems) {
-    let getNameThemeFromObjectWithThems;
-    if (arg === "true") {
-      getNameThemeFromObjectWithThems = objWithThems.black;
-    } else {
-      getNameThemeFromObjectWithThems = objWithThems.default;
-    }
-
-    Object.entries(getNameThemeFromObjectWithThems).forEach(([key, value]) => {
-      document.documentElement.style.setProperty(key, value);
-    });
-  }
-  //----------------------------------------------
-
-  //localStorageHandlers
-  function setItemToLocalStorage(key, item) {
-    localStorage.setItem(key, item);
-  }
-
-  setItemToLocalStorage("thems", JSON.stringify(themeColors));
-
-  function getItemFromLocalStorage() {
-    let check = localStorage.getItem("checked");
-    const thems = JSON.parse(localStorage.getItem("thems"));
-
-    if (check.toString() && check === "true") {
-      switcher.forEach((inp) => (inp.checked = true));
-
-      switcherLable.forEach((label) => {
-        label.style.backgroundImage = "url(img/icons/sun_icon.svg)";
-      });
-
-      onSetTheme(check, thems);
-    } else {
-      switcherLable.forEach((label) => {
-        label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
-      });
-
-      onSetTheme(check, thems);
-    }
-  }
-
-  getItemFromLocalStorage();
-  //----------------------------------------------
-
   //---------------------------------------------------------------------
 });
