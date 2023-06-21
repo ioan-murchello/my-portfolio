@@ -56,8 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         onSetTheme(e.target.checked.toString(), themeColors);
       } else {
-        // switcher.forEach((inp) => (inp.checked = e.target.checked));
-
         switcherLable.forEach((label) => {
           label.style.backgroundImage = "url(img/icons/moon_icon.svg)";
         });
@@ -212,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
   toTop();
 
   //slider --------------------------------------------------
-  var slider_line = document.querySelector(".swiper-wrapper"); 
+  var slider_line = document.querySelector(".swiper-wrapper");
   var data = [
     {
       thumbnail: "./img/paracell.jpg",
@@ -282,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ' target="_blank" class="slider__description-btn btn"\n                  >Open\n                  <svg\n                    width="12"\n                    height="12"\n                    viewBox="0 0 12 12"\n                    fill="none"\n                    xmlns="http://www.w3.org/2000/svg"\n                  >\n                    <path\n                      d="M3.74994 0.750061V2.25006H8.69244L-6.10352e-05 10.9426L1.05744 12.0001L9.74994 3.30756V8.25006H11.2499V0.750061H3.74994Z"\n                      fill="white"\n                    />\n                  </svg>\n                </a>\n              </div>\n             </div>'
       );
   }
-  
+
   //popup-------------------------------------
 
   var pop_up = document.querySelector(".popup_main_wrapper");
@@ -375,14 +373,14 @@ document.addEventListener("DOMContentLoaded", function () {
     loop: true,
     autoplay: {
       delay: 5000,
-      disableOnInteraction: false,
-    }, 
+      disableOnInteraction: true,
+    },
 
     speed: 800,
 
-    direction: 'horizontal',
+    direction: "horizontal",
 
-    effect: 'slide', 
+    effect: "slide",
 
     // If we need pagination
     pagination: {
@@ -410,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function () {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
-    
+
     // switch On, switch Off on PC
     simulateTouch: true,
 

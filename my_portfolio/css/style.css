@@ -724,18 +724,17 @@ body {
 
 .slider__window {
   box-shadow: 0 0 5px var(--body-color);
-
   position: relative;
   margin: 0 auto;
   padding: 0;
   width: 100%;
   height: 486px;
   overflow: hidden;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
   margin: 0 auto;
 }
 
@@ -749,6 +748,11 @@ body {
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
 }
 
 .description {
